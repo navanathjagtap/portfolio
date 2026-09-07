@@ -599,18 +599,116 @@ ul{
         0 0 40px rgba(37,99,235,.25);
 
     z-index:2;
+
+    transition:
+        transform .5s cubic-bezier(.2,.8,.2,1),
+        box-shadow .5s ease;
 }
+
+
+/* Photo */
+
 .profile-photo{
     width:100%;
     height:100%;
     object-fit:cover;
     object-position:center top;
     display:block;
-    transition:transform .5s ease;
+
+    transition:
+        transform .7s cubic-bezier(.2,.8,.2,1),
+        filter .5s ease;
 }
 
+
+/* Professional Hover */
+
+.profile-card:hover{
+    transform:translateY(-10px) scale(1.02);
+
+    box-shadow:
+        0 35px 80px rgba(0,0,0,.45),
+        0 0 70px rgba(37,99,235,.40),
+        0 0 120px rgba(6,182,212,.18);
+}
+
+
 .profile-card:hover .profile-photo{
-    transform:scale(1.04);
+    transform:scale(1.06);
+
+    filter:
+        brightness(1.05)
+        contrast(1.04)
+        saturate(1.08);
+}
+
+
+/* Light Shine */
+
+.profile-card::before{
+    content:"";
+
+    position:absolute;
+    top:0;
+    left:-120%;
+
+    width:60%;
+    height:100%;
+
+    background:linear-gradient(
+        110deg,
+        transparent,
+        rgba(255,255,255,.20),
+        transparent
+    );
+
+    transform:skewX(-20deg);
+
+    z-index:5;
+    pointer-events:none;
+}
+
+
+.profile-card:hover::before{
+    animation:photoShine 1s ease;
+}
+
+
+@keyframes photoShine{
+
+    0%{
+        left:-120%;
+    }
+
+    100%{
+        left:150%;
+    }
+}
+
+
+/* Premium Border Glow */
+
+.profile-card::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    border-radius:30px;
+
+    border:1px solid transparent;
+
+    pointer-events:none;
+
+    transition:.5s ease;
+}
+
+
+.profile-card:hover::after{
+    border-color:rgba(59,130,246,.65);
+
+    box-shadow:
+        inset 0 0 25px rgba(59,130,246,.12);
 }
 
 .profile-overlay{
